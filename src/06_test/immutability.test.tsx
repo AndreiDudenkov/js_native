@@ -3,7 +3,7 @@ import {
     CompaniesType,
     makeHairStyle,
     removeCssBook,
-    updatedBooks,
+    updatedBooks, updatedUser2,
     updateLaptop,
     UserType,
     UserWithBooksType,
@@ -105,8 +105,27 @@ test('removeCssBook', () => {
     expect(user.books[2]).toBe('js')
 
 })
-test('updatedUserCompany', () => {
-    let user: UserWithLaptop & CompaniesType = {
+// test('updatedUserCompany', () => {
+//     let user: UserWithLaptop & CompaniesType = {
+//         name: 'Andrei',
+//         hair: 32,
+//         address: {
+//             title: 'Vitebsk',
+//             house: 12
+//         },
+//         laptop: {
+//             title: 'ZenBook'
+//         },
+//         companies: [{id:1, title: "Epam"}, {id:2, title: "IT-Inc"}]
+//     }
+//     const updatedUserCompany= addCompany(user, 1, 'Google')
+//
+//     expect(updatedUserCompany.companies[0]).toEqual({id:1, title: "Google"})
+//     expect(user.companies[0]).toEqual({id:1, title: "Epam"})
+//
+// })
+test('updatedUserCompany2', () => {
+    let user: UserWithLaptop = {
         name: 'Andrei',
         hair: 32,
         address: {
@@ -115,13 +134,17 @@ test('updatedUserCompany', () => {
         },
         laptop: {
             title: 'ZenBook'
-        },
-        companies: [{id:1, title: "Epam"}, {id:2, title: "IT-Inc"}]
+        }
     }
-    const updatedUserCompany= addCompany(user, 1, 'Google')
+    const companies = {
+        'Andrei': [{id:1, title: "Epam"}, {id:2, title: "IT-Inc"}],
+        'Dimych': [{id:2, title: "IT-Inc"}]
+    }
 
-    expect(updatedUserCompany.companies[0]).toEqual({id:1, title: "Google"})
-    expect(user.companies[0]).toEqual({id:1, title: "Epam"})
+ const updatedUserCompany2 = updatedUser2(companies,'Andrei', 1, 'Google' )
+
+expect(updatedUserCompany2['Andrei'][0].title).toBe('Google')
+expect(companies['Andrei'][0].title).toBe('Epam')
 
 })
 
